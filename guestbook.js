@@ -18,7 +18,7 @@ const guestbook = {
       headers: 
       { accept: 'application/json',
         'content-type': 'application/json' },
-      type: 'PUT',
+      type: 'POST',
       url: `${apiUrl}/entries`,
       contentType: 'application/json; charset=utf-8',
       body:
