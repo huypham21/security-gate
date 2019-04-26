@@ -15,20 +15,18 @@ const guestbook = {
   add(name, email, comment) {
     console.log('Sending', name, email, comment)
     return $.ajax({
+      url: 'https://service.us.apiconnect.ibmcloud.com/gws/apigateway/api/386b64d5f250139422616a022cee6819906461fbf909ee458c8c4b3485db8592/guestbook/entries',
       headers: 
       { accept: 'application/json',
         'content-type': 'application/json' },
-      type: 'POST',
-      url: `${apiUrl}/entries`,
-      contentType: 'application/json; charset=utf-8',
-      body:
-      {data: JSON.stringify({
-        name,
-        email,
-        comment,
-      })},
-      dataType: 'json',
-    });
+      body: { 
+        id: 4343658534928384,
+        data: JSON.stringify({
+          name,
+          email,
+          comment,
+        }) },
+      json: true });
   }
 };
 
