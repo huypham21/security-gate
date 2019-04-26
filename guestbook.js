@@ -12,24 +12,24 @@ const guestbook = {
     });
   },
   // add a single guestbood entry
-  add(name, email, comment) {
-    console.log('Sending', name, email, comment)
-    return $.ajax({
-      url: 'https://service.us.apiconnect.ibmcloud.com/gws/apigateway/api/386b64d5f250139422616a022cee6819906461fbf909ee458c8c4b3485db8592/guestbook/entries',
-      headers: 
-      { accept: 'application/json',
-        'content-type': 'application/json' },
-      body: { 
-        id: 4343658534928384,
-        json: true,
-        data: JSON.stringify({
-          name,
-          email,
-          comment,
-        })
-      }
-    });
-  }
+  // add(name, email, comment) {
+  //   console.log('Sending', name, email, comment)
+  //   return $.ajax({
+  //     url: 'https://service.us.apiconnect.ibmcloud.com/gws/apigateway/api/386b64d5f250139422616a022cee6819906461fbf909ee458c8c4b3485db8592/guestbook/entries',
+  //     headers: 
+  //     { accept: 'application/json',
+  //       'content-type': 'application/json' },
+  //     body: { 
+  //       id: 4343658534928384,
+  //       json: true,
+  //       data: JSON.stringify({
+  //         name,
+  //         email,
+  //         comment,
+  //       })
+  //     }
+  //   });
+  // }
 };
 
 // Install request by running "npm install --save request"
@@ -54,21 +54,26 @@ const guestbook = {
 //   console.log('Success: ', body);
 // });
 
-// var request = require("request");
+var request = require("request");
 
-// var options = { method: 'POST',
-//   url: 'https://service.us.apiconnect.ibmcloud.com/gws/apigateway/api/386b64d5f250139422616a022cee6819906461fbf909ee458c8c4b3485db8592/guestbook/entries',
-//   headers: 
-//    { accept: 'application/json',
-//      'content-type': 'application/json' },
-//   body: { id: 4343658534928384 },
-//   json: true };
+var options = { method: 'POST',
+  url: 'https://service.us.apiconnect.ibmcloud.com/gws/apigateway/api/386b64d5f250139422616a022cee6819906461fbf909ee458c8c4b3485db8592/guestbook/entries',
+  headers: 
+   { accept: 'application/json',
+     'content-type': 'application/json' },
+  body: { id: 4343658534928384,
+  data: JSON.stringify({
+          name,
+          email,
+          comment,
+        }) },
+  json: true };
 
-// request(options, function (error, response, body) {
-//   if (error) return console.error('Failed: %s', error.message);
+request(options, function (error, response, body) {
+  if (error) return console.error('Failed: %s', error.message);
 
-//   console.log('Success: ', body);
-// });
+  console.log('Success: ', body);
+});
 
 (function() {
 
@@ -102,7 +107,7 @@ const guestbook = {
   $(document).on('submit', '#addEntry', function(e) {
     e.preventDefault();
 
-    guestbook.add(
+    request.require(
       $('#name').val().trim(),
       $('#email').val().trim(),
       $('#comment').val().trim()
