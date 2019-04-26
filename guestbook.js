@@ -1,6 +1,12 @@
 /**
  * Web application
  */
+TESTER = document.getElementById('tester');
+	Plotly.plot( TESTER, [{
+	x: [1, 2, 3, 4, 5],
+	y: [1, 2, 4, 8, 16] }], {
+  margin: { t: 0 } } );
+  
 const apiUrl = 'https://9393fc9c.us-south.apiconnect.appdomain.cloud/guestbook';
 const guestbook = {
   // retrieve the existing guestbook entries
@@ -12,68 +18,21 @@ const guestbook = {
     });
   },
   // add a single guestbood entry
-  // add(name, email, comment) {
-  //   console.log('Sending', name, email, comment)
-  //   return $.ajax({
-  //     url: 'https://service.us.apiconnect.ibmcloud.com/gws/apigateway/api/386b64d5f250139422616a022cee6819906461fbf909ee458c8c4b3485db8592/guestbook/entries',
-  //     headers: 
-  //     { accept: 'application/json',
-  //       'content-type': 'application/json' },
-  //     body: { 
-  //       id: 4343658534928384,
-  //       json: true,
-  //       data: JSON.stringify({
-  //         name,
-  //         email,
-  //         comment,
-  //       })
-  //     }
-  //   });
-  // }
+  add(name, email, comment) {
+    console.log('Sending', name, email, comment)
+    return $.ajax({
+      type: 'POST',
+      url: `${apiUrl}/entries`,
+      contentType: 'application/json; charset=utf-8',
+      data: JSON.stringify({
+        name,
+        email,
+        comment,
+      }),
+      dataType: 'json',
+    });
+  }
 };
-
-// Install request by running "npm install --save request"
-// var request = require("request");
-
-// var options = { method: 'PUT',
-//   url: 'https://9393fc9c.us-south.apiconnect.appdomain.cloud/guestbook/entries',
-//   headers: 
-//    { accept: 'application/json',
-//      'content-type': 'application/json' },
-//   contentType: 'application/json; charset=utf-8',
-//   data: JSON.stringify({
-//     name,
-//     email,
-//     comment,
-//   }),
-//   json: true };
-
-// request(options, function (error, response, body) {
-//   if (error) return console.error('Failed: %s', error.message);
-
-//   console.log('Success: ', body);
-// });
-
-var request = require("request");
-
-var options = { method: 'POST',
-  url: 'https://service.us.apiconnect.ibmcloud.com/gws/apigateway/api/386b64d5f250139422616a022cee6819906461fbf909ee458c8c4b3485db8592/guestbook/entries',
-  headers: 
-   { accept: 'application/json',
-     'content-type': 'application/json' },
-  body: { id: 4343658534928384,
-  data: JSON.stringify({
-          name,
-          email,
-          comment,
-        }) },
-  json: true };
-
-request(options, function (error, response, body) {
-  if (error) return console.error('Failed: %s', error.message);
-
-  console.log('Success: ', body);
-});
 
 (function() {
 
@@ -107,7 +66,7 @@ request(options, function (error, response, body) {
   $(document).on('submit', '#addEntry', function(e) {
     e.preventDefault();
 
-    request.require(
+    guestbook.add(
       $('#name').val().trim(),
       $('#email').val().trim(),
       $('#comment').val().trim()
@@ -124,3 +83,4 @@ request(options, function (error, response, body) {
     loadEntries();
   });
 })();
+
