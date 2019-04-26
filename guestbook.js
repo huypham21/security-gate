@@ -1,11 +1,6 @@
 /**
  * Web application
  */
-TESTER = document.getElementById('tester');
-	Plotly.plot( TESTER, [{
-	x: [1, 2, 3, 4, 5],
-	y: [1, 2, 4, 8, 16] }], {
-  margin: { t: 0 } } );
   
 const apiUrl = 'https://9393fc9c.us-south.apiconnect.appdomain.cloud/guestbook';
 const guestbook = {
@@ -84,3 +79,8 @@ const guestbook = {
   });
 })();
 
+TESTER = document.getElementById('tester');
+	Plotly.plot( TESTER, [{
+	x: [1, 2, 3, 4, 5],
+	y: [1, 2, 4, 8, 16] }], {
+  margin: { t: 0 } } );
