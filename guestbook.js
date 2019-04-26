@@ -21,37 +21,38 @@ const guestbook = {
       type: 'PUT',
       url: `${apiUrl}/entries`,
       contentType: 'application/json; charset=utf-8',
-      data: JSON.stringify({
+      body:
+      {data: JSON.stringify({
         name,
         email,
         comment,
-      }),
+      })},
       dataType: 'json',
     });
   }
 };
 
 // Install request by running "npm install --save request"
-var request = require("request");
+// var request = require("request");
 
-var options = { method: 'PUT',
-  url: 'https://9393fc9c.us-south.apiconnect.appdomain.cloud/guestbook/entries',
-  headers: 
-   { accept: 'application/json',
-     'content-type': 'application/json' },
-  contentType: 'application/json; charset=utf-8',
-  data: JSON.stringify({
-    name,
-    email,
-    comment,
-  }),
-  json: true };
+// var options = { method: 'PUT',
+//   url: 'https://9393fc9c.us-south.apiconnect.appdomain.cloud/guestbook/entries',
+//   headers: 
+//    { accept: 'application/json',
+//      'content-type': 'application/json' },
+//   contentType: 'application/json; charset=utf-8',
+//   data: JSON.stringify({
+//     name,
+//     email,
+//     comment,
+//   }),
+//   json: true };
 
-request(options, function (error, response, body) {
-  if (error) return console.error('Failed: %s', error.message);
+// request(options, function (error, response, body) {
+//   if (error) return console.error('Failed: %s', error.message);
 
-  console.log('Success: ', body);
-});
+//   console.log('Success: ', body);
+// });
 
 (function() {
 
