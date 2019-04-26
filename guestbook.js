@@ -21,12 +21,14 @@ const guestbook = {
         'content-type': 'application/json' },
       body: { 
         id: 4343658534928384,
+        json: true,
         data: JSON.stringify({
           name,
           email,
           comment,
-        }) },
-      json: true });
+        })
+      }
+    });
   }
 };
 
@@ -44,6 +46,22 @@ const guestbook = {
 //     email,
 //     comment,
 //   }),
+//   json: true };
+
+// request(options, function (error, response, body) {
+//   if (error) return console.error('Failed: %s', error.message);
+
+//   console.log('Success: ', body);
+// });
+
+// var request = require("request");
+
+// var options = { method: 'POST',
+//   url: 'https://service.us.apiconnect.ibmcloud.com/gws/apigateway/api/386b64d5f250139422616a022cee6819906461fbf909ee458c8c4b3485db8592/guestbook/entries',
+//   headers: 
+//    { accept: 'application/json',
+//      'content-type': 'application/json' },
+//   body: { id: 4343658534928384 },
 //   json: true };
 
 // request(options, function (error, response, body) {
